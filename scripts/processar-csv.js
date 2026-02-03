@@ -220,9 +220,12 @@ function processarDados() {
   });
 
   // Calcular estatísticas gerais
-  const totalGeral = agregacoes['0_0_0'].total;
+  const totalGeral = processados; // Usar contador real de registros processados
   const diasNoPeriodo = 151; // Jan-Mai 2025
   const mediaDiaria = Math.round(totalGeral / diasNoPeriodo);
+  
+  // Corrigir o total na agregação principal para mostrar valor correto
+  agregacoes['0_0_0'].total = totalGeral;
   
   // Hora com mais infrações
   const horasSorted = Object.entries(totaisPorHora)

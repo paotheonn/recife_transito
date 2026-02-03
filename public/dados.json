@@ -1,14 +1,14 @@
 {
   "meta": {
     "periodo": "Janeiro a Maio 2025",
-    "totalGeral": 245824,
-    "mediaDiaria": 1628,
+    "totalGeral": 171109,
+    "mediaDiaria": 1133,
     "diasNoPeriodo": 151,
     "horaPico": {
       "hora": 15,
       "total": 15997
     },
-    "geradoEm": "2026-02-03T11:05:18.191Z"
+    "geradoEm": "2026-02-03T11:09:20.747Z"
   },
   "referencias": {
     "meses": [
@@ -240,7 +240,7 @@
   },
   "agregacoes": {
     "0_0_0": {
-      "total": 245824,
+      "total": 171109,
       "porHora": [
         131,
         103,
