@@ -20,7 +20,24 @@ const DIAS_SEMANA = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'
 // Função para parsear CSV manualmente (evita dependência externa)
 // O CSV usa ponto-e-vírgula como separador
 function parseCSV(content) {
-  const lines = content.split('\n');
+  // Normalizar quebras de linha dentro de campos com aspas
+  // Substituir quebras de linha que estão dentro de aspas por espaço
+  let normalizado = '';
+  let dentroAspas = false;
+  
+  for (let i = 0; i < content.length; i++) {
+    const char = content[i];
+    if (char === '"') {
+      dentroAspas = !dentroAspas;
+      normalizado += char;
+    } else if ((char === '\n' || char === '\r') && dentroAspas) {
+      normalizado += ' '; // Substituir quebra de linha por espaço
+    } else {
+      normalizado += char;
+    }
+  }
+  
+  const lines = normalizado.split('\n');
   const headers = lines[0].split(';').map(h => h.trim().replace(/"/g, ''));
   const records = [];
 
@@ -29,6 +46,9 @@ function parseCSV(content) {
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i].trim();
     if (!line) continue;
+    
+    // Verificar se a linha começa com uma data válida (YYYY-MM-DD)
+    if (!/^\d{4}-\d{2}-\d{2}/.test(line)) continue;
 
     // Parse com ponto-e-vírgula como separador
     const values = [];
